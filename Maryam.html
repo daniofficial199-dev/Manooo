@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mano 💖 Kiss Day Surprise</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff4e8b, #ff99cc, #ff1a75);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: 42px;
+      text-shadow: 0 0 20px white;
+    }
+
+    .box {
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      background: white;
+      color: #ff1a75;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px;
+      box-shadow: 0 0 15px white;
+    }
+
+    button:hover {
+      background: #ff1a75;
+      color: white;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border-radius: 20px;
+      border: none;
+      margin: 10px;
+      width: 250px;
+      text-align: center;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 20px;
+      width: 85%;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 150px;
+      white-space: pre-wrap;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 25px;
+      animation: floatUp 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-900px); opacity: 0; }
+    }
+  </style>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="text/javascript">
+     (function(){
+        emailjs.init("pxX4FEkpSmj79MrLg"); // Your Public Key
+     })();
+  </script>
+
+</head>
+
+<body>
+
+<h1>💖 Ummman😘 meri Mano 💋</h1>
+
+<div id="content" class="box">
+  <h2>Mere dil k alfaz dekhna chahti ho? 💘</h2>
+  <button onclick="showLogin()">Han 💋</button>
+  <button onclick="alert('No option disabled 😌 Only Yes works for Mano 💖')">No ❌</button>
+</div>
+
+<audio id="bgMusic" src="love.mp3" loop></audio>
+
+<script>
+
+function showLogin() {
+  document.getElementById("content").innerHTML = `
+    <h2>💋 Chal Password likh agr pyar krti 💋</h2>
+    <p>Muje kisi b krna rply kr k 😘</p>
+    <input type="password" id="pass" placeholder="Meri mano k face pe ummaah likh password ab">
+    <br>
+    <button onclick="checkLogin()">Login 💖</button>
+  `;
+}
+
+function checkLogin() {
+  const pass = document.getElementById("pass").value;
+  if(pass.toLowerCase() === "ilovedani") {
+    startLove();
+  } else {
+    alert("Wrong password 😝 Hint: Who loves Dani? 💘");
+  }
+}
+
+function startLove() {
+
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.6;
+  music.play();
+
+  document.getElementById("content").innerHTML = `<div id="message"></div>`;
+
+  const text = `
+Mano I Love You 💖
+Ummmaahhh 😘💋
+Happy Kiss Day Mano and All Days 💞
+
+I miss you bht sara bht zeada 
+Me sath ly k jana tha lakin ye sub
+Lakin me miss ni krta hihihihi 😜💋
+
+💌 Romantic Poetry For You 💌
+
+Tere honton ki mithaas mein meri jaan basi hai 💋  
+Tere pyar ki khushboo se meri duniya hansi hai 💖  
+Har ek kiss mein tera ehsaas mehsoos hota hai 😘  
+Tu paas ho ya door, tu hi meri zindagi hai ❤️  
+Tumhari muskurahat meri rooh ka sukoon hai 🌸  
+Tumhara pyar meri duniya ka junoon hai 💞  
+Aaj Kiss Day par sirf itna kehna hai...  
+Mano, tum meri mohabbat ka sabse khoobsurat sakoon ho 💋💖  
+
+Forever Yours,  
+Dani 💘
+  `;
+
+  let i = 0;
+
+  function typeEffect() {
+    if (i < text.length) {
+      document.getElementById("message").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeEffect, 35);
+    } else {
+      showReplyOption();
+    }
+  }
+
+  typeEffect();
+  createHearts();
+}
+
+function showReplyOption() {
+  const replyDiv = document.createElement("div");
+  replyDiv.innerHTML = `
+    <h2 style="margin-top:50px;">Kea tum jawab me kuch likhna chaho gi? 💌</h2>
+    <button onclick="showInputBox()">Yes 💖</button>
+    <button onclick="terminalOff()">No ❌</button>
+  `;
+  document.getElementById("content").appendChild(replyDiv);
+}
+
+function showInputBox() {
+  document.getElementById("content").innerHTML += `
+    <h2 style="margin-top:40px;">Apny dil ki bat yha likh do 💖</h2>
+    <textarea id="herMessage" rows="4"></textarea>
+    <br>
+    <button onclick="sendMessage()">Send 💋</button>
+  `;
+}
+
+// ✅ Send her message to your Gmail and show on screen
+function sendMessage() {
+  const msg = document.getElementById("herMessage").value;
+
+  if(msg.trim() !== "") {
+    // Send via EmailJS
+    emailjs.send("service_mtfkdce", "template_kwb8o3c", { // Your Template ID
+      from_name: "Mano 💖",
+      message: msg,
+      to_email: "daniofficial199@gmail.com"
+    }).then(function(response) {
+      alert("Message sent to Dani! 😘💖");
+
+      // Also display message on screen
+      const displayDiv = document.createElement("div");
+      displayDiv.innerHTML = `
+        <h2 style="margin-top:20px;">Mano's Reply 💖</h2>
+        <div style="background:white;color:#ff1a75;padding:20px;border-radius:20px;width:70%;margin:auto;font-size:18px;">
+          ${msg}
+        </div>
+      `;
+      document.getElementById("content").appendChild(displayDiv);
+
+    }, function(error) {
+      alert("Failed to send message. Try again 😢");
+    });
+  }
+}
+
+function terminalOff() {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:30px;">
+      💻 Terminal Closed... <br><br>
+      But Dani Still Loves Mano 💖💋
+    </div>
+  `;
+}
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    const emojis = ["💖","💋","😘","❤️"];
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }, 300);
+}
+
+</script>
+
+</body>
+</html>
